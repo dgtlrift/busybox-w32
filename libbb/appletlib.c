@@ -34,6 +34,11 @@
 # include <malloc.h> /* for mallopt */
 #endif
 
+#if ENABLE_PLATFORM_MINGW32
+# if ENABLE_FEATURE_SYSLOG
+#  include <syslog.h>
+# endif
+#endif
 
 /* Declare <applet>_main() */
 #define PROTOTYPES
@@ -310,6 +315,9 @@ void lbb_prepare(const char *applet
 
 #if ENABLE_PLATFORM_MINGW32
 	init_winsock();
+# if ENABLE_FEATURE_SYSLOG
+	init_syslog( NULL );
+# endif
 #endif
 
 #if ENABLE_FEATURE_INDIVIDUAL

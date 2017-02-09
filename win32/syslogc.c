@@ -29,7 +29,7 @@
  * Based on code by Alexander Yaworsky
  * 
  */
-
+#include "libbb.h"
 #include <stdio.h>
 #include <string.h>
 #include <winsock2.h>
@@ -37,7 +37,7 @@
 #include "syslog.h"
 
 #define SYSLOG_DGRAM_SIZE 1024
-
+#ifdef ENABLE_FEATURE_SYSLOG
 static BOOL        syslog_opened = FALSE;
 
 static int         syslog_mask = 0xFF;
@@ -287,7 +287,7 @@ void syslog( int pri, char* fmt, ... )
  */
 void vsyslog( int pri, char* fmt, va_list ap )
 {
-    static char *month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    static const char *month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                             "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
     char  datagramm[ SYSLOG_DGRAM_SIZE ];
     SYSTEMTIME stm;
@@ -328,4 +328,4 @@ void vsyslog( int pri, char* fmt, va_list ap )
  done:
     LeaveCriticalSection(&cs_syslog);
 }
-
+#endif /* ENABLE_FEATURE_SYSLOG */

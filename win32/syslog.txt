@@ -1,0 +1,16 @@
+Looked at using either:
+	https://sourceforge.net/projects/syslog-win32/
+	settled on
+	https://github.com/asankah/syslog-win32
+
+Would like to reference the library instead of pulling it in:
+	for example, have a Kbuild rule that downloads the modules instead of embedding them here as part of the commit.
+
+Something like...
+syslog-win32:
+	git clone https://github.com/asankah/syslog-win32.git &&
+	for f in ./syslog-win32/* ; do
+		ln -s -n ${f}
+	done
+
+This way the source doesn't need to be included... could be done with submodules I guess, but in short - Kbuild needs someway to allow defining, finding, and pulling external dependancies that are beyond the scope of the current project.

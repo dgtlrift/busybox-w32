@@ -237,6 +237,7 @@ int ioctl(int fd, int code, ...);
 #define SHUT_WR SD_SEND
 
 int mingw_socket(int domain, int type, int protocol);
+int mingw_socketpair(int domain, int type, int protocol, int sv[2]);
 int mingw_connect(int sockfd, const struct sockaddr *sa, size_t sz);
 int mingw_bind(int sockfd, struct sockaddr *sa, size_t sz);
 int mingw_setsockopt(int sockfd, int lvl, int optname, void *optval, int optlen);
@@ -249,6 +250,7 @@ int mingw_select (int nfds, fd_set *rfds, fd_set *wfds, fd_set *xfds,
 NOIMPL(mingw_sendto,SOCKET s UNUSED_PARAM, const char *buf UNUSED_PARAM, int len UNUSED_PARAM, int flags UNUSED_PARAM, const struct sockaddr *sa UNUSED_PARAM, int salen UNUSED_PARAM);
 
 #define socket mingw_socket
+#define socketpair mingw_socketpair
 #define connect mingw_connect
 #define sendto mingw_sendto
 #define listen mingw_listen

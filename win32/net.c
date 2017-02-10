@@ -46,6 +46,14 @@ int mingw_socket(int domain, int type, int protocol)
 	return sockfd;
 }
 
+#undef socketpair
+int mingw_socketpair(int domain, int type, int protocoli, int sv[2])
+{
+	/* TODO: Emulate SocketPair implemetation */
+	errno = ENOSYS;
+	return -1;
+}
+
 #undef connect
 int mingw_connect(int sockfd, const struct sockaddr *sa, size_t sz)
 {
